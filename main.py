@@ -6,40 +6,7 @@ sys.path.append(parent_folder_path)
 sys.path.append(os.path.join(parent_folder_path, 'lib'))
 sys.path.append(os.path.join(parent_folder_path, 'plugin'))
 
-from flowlauncher import FlowLauncher
-import webbrowser
-
-
-class HelloWorld(FlowLauncher):
-
-    def query(self, query):
-        return [
-            {
-                "Title": "Hello World.{}".format(('Your query is: ' + query , query)[query == '']),
-                "SubTitle": "This is where your subtitle goes, press enter to open Flow's url",
-                "IcoPath": "Images/app.png",
-                "JsonRPCAction": {
-                    "method": "open_url",
-                    "parameters": ["https://github.com/Rozman123Rok/Flow.Launcher.Plugin.SlovenskeZeleznice"]
-                }
-            }
-        ]
-
-    def context_menu(self, data):
-        return [
-            {
-                "Title": "Hello World Python's Context menu",
-                "SubTitle": "Press enter to open Flow the plugin's repo in GitHub",
-                "IcoPath": "Images/app.png",
-                "JsonRPCAction": {
-                    "method": "open_url",
-                    "parameters": ["https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldPython"]
-                }
-            }
-        ]
-
-    def open_url(self, url):
-        webbrowser.open(url)
+from plugin import Scraper
 
 if __name__ == "__main__":
-    HelloWorld()
+    Scraper()
