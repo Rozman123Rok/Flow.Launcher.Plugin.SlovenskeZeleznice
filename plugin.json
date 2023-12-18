@@ -1,0 +1,12 @@
+{
+    "ID": "46708036-c66e-4e3c-983b-fd5ff1cc792b",
+    "ActionKeyword": "sz",
+    "Name": "Slovenske zeleznice",
+    "Description": "Slovenske zeleznice test",
+    "Author": "Rok Rozman",
+    "Version": "1.0.0",
+    "Language": "python",
+    "Website": "https://github.com/Rozman123Rok/Flow.Launcher.Plugin.SlovenskeZeleznice",
+    "IcoPath": "Images\\app.png",
+    "ExecuteFileName": "main.py"
+}
