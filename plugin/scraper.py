@@ -8,7 +8,11 @@ from datetime import datetime
 class Scraper(FlowLauncher):
 
     current_date = datetime.now().strftime("%d.%m.%Y")
-    URL = "https://potniski.sz.si/vozni-red/?action=timetables_search&current-language=sl&departure-date=" + current_date + "&entry-station=43203&exit-station=43400"
+    URL1 = "https://potniski.sz.si/vozni-red/?action=timetables_search&current-language=sl&departure-date=" + current_date + "&entry-station=43203&exit-station=43400"
+    URL2 = "https://potniski.sz.si/vozni-red/?action=timetables_search&current-language=sl&departure-date=" + current_date + "&entry-station=43400&exit-station=43203"
+
+    GITHUB_URL = "https://github.com/Rozman123Rok/Flow.Launcher.Plugin.SlovenskeZeleznice"
+    GITHUB_USAGE = "https://github.com/Rozman123Rok/Flow.Launcher.Plugin.SlovenskeZeleznice?tab=readme-ov-file#usage"
 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -17,20 +21,27 @@ class Scraper(FlowLauncher):
     ICON_PATH = "Images\\logo.jpg"
     session = requests.Session()
 
-    def add_message(self, text: str, subtext: str = None):
+    def add_message(self, text: str, subtext: str = None, url: str = None):
         self.query_results.append({
             "Title": text,
             "SubTitle": subtext,
             "IcoPath": self.ICON_PATH,
             "JsonRPCAction": {
                 "method": "open_url",
-                "parameters": [self.URL]
+                "parameters": [url or self.GITHUB_URL]
             }
         })
 
     def query(self, query):
-        self.get_data()
-        self.add_message(self.URL)
+        if query == "1": 
+            # Poljcane -> Maribor
+            self.get_data(self.URL1)
+        elif query == "2" or query == "":
+            # Maribor -> Poljcane
+            self.get_data(self.URL2)
+        else:
+            self.add_message("Query not defined, check GitHub page for info", query, self.GITHUB_USAGE)
+
         return self.query_results 
     
     def context_menu(self, data):
@@ -49,8 +60,8 @@ class Scraper(FlowLauncher):
     def open_url(self, url):
         webbrowser.open(url)
 
-    def get_data(self):
-        response = requests.get(self.URL, headers = self.headers)
+    def get_data(self, url):
+        response = requests.get(url, headers = self.headers)
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -68,6 +79,6 @@ class Scraper(FlowLauncher):
                 arrival_station = arrival_info[2]
                 arrival_time = arrival_info[4]
 
-                self.add_message(departure_station + " : " + departure_time + " -> " + arrival_station + " : "+ arrival_time)
+                self.add_message(departure_station + " : " + departure_time + " -> " + arrival_station + " : "+ arrival_time, '', url)
         else:
-            self.add_message('Error', str(response.status_code))
+            self.add_message('Error', str(response.status_code), url)

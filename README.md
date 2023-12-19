@@ -10,7 +10,9 @@ This is a FlowLauncher plugin designed to provide train schedule information bet
 This are commands for using this plugin.
 | Command | Example | Description |
 | -------- | -------- | -------- |
-| sz   | sz   | Provides train schedule information between Poljčane and Maribor stations.   |
+| sz 1  | sz  1 | Provides train schedule information between Poljčane and Maribor stations.   |
+| sz 2  | sz  2 | Provides train schedule information between Maribor and Poljčane stations.   |
+| sz  | sz  | Provides train schedule information between Maribor and Poljčane stations.   |
 
 
 ## Installation
@@ -31,6 +33,6 @@ There are two ways to install plugin for personal use. Because plugin was not ad
 
 ### TODO
 - [x] Fix date in url
-- [ ] Add to show trains schedule in other direction (Maribor -> Poljčane)
+- [x] Add to show trains schedule in other direction (Maribor -> Poljčane)
 - [ ] Add possibility to set stations in plugin settings -> would have to edit scraper
 - [ ] Add to display delay time in subtext
