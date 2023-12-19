@@ -3,10 +3,13 @@ import webbrowser
 import requests
 from bs4 import BeautifulSoup
 import os
+from datetime import datetime
 
 class Scraper(FlowLauncher):
 
-    URL = "https://potniski.sz.si/vozni-red/?action=timetables_search&current-language=sl&departure-date=18.12.2023&entry-station=43203&exit-station=43400"
+    current_date = datetime.now().strftime("%d.%m.%Y")
+    URL = "https://potniski.sz.si/vozni-red/?action=timetables_search&current-language=sl&departure-date=" + current_date + "&entry-station=43203&exit-station=43400"
+
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
@@ -27,6 +30,7 @@ class Scraper(FlowLauncher):
 
     def query(self, query):
         self.get_data()
+        self.add_message(self.URL)
         return self.query_results 
     
     def context_menu(self, data):
