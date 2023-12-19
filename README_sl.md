@@ -9,7 +9,9 @@ To je vtičnik za FlowLauncher, zasnovan za zagotavljanje informacij o voznem re
 Tukaj so ukazi za uporabo tega vtičnika.
 | Ukaz | Primer | Opis |
 | -------- | -------- | -------- |
-| sz   | sz   | Prikazuje informacije o voznem redu vlakov med postajama Poljčane in Maribor.   |
+| sz   | sz   | Prikazuje informacije o voznem redu vlakov med postajama Maribor in Poljčane.   |
+| sz 1  | sz 1 | Prikazuje informacije o voznem redu vlakov med postajama Poljčane in Maribor.   |
+| sz 2  | sz 2 | Prikazuje informacije o voznem redu vlakov med postajama Maribor in Poljčane.   |
 
 ## Namestitev
 Obstajata dva načina namestitve vtičnika za osebno uporabo. Ker vtičnik ni dodan v Flow's Plugin Store, ga je treba namestiti ročno.
